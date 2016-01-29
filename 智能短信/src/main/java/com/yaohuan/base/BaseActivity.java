@@ -1,18 +1,25 @@
 package com.yaohuan.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 
 /**
  * Created by yh on 2016/1/28.
+ * activity基类
  */
 public abstract class BaseActivity extends ActionBarActivity implements View.OnClickListener {
-    @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-    }
+    /**
+     * 注意必须调用一个参数的onCreate方法，否则会出错
+     * @param savedInstanceState
+     */
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       initView();
+       initData();
+       initListener();
+   }
 
     public abstract void initView();
 
@@ -20,9 +27,9 @@ public abstract class BaseActivity extends ActionBarActivity implements View.OnC
 
     public abstract void initData();
 
-    public abstract void processClick();
+    public abstract void processClick(View v);
     @Override
     public void onClick(View v) {
-
+        processClick(v);
     }
 }
